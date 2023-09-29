@@ -155,7 +155,7 @@ async def createserver(pool, bot, guild):
     try:
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                await cur.execute(f"""INSERT IGNORE INTO {bot.user.name} (serverid, servername) VALUES ({guild.id}, "{guild.name}");""")
+                await cur.execute(f"""INSERT IGNORE INTO {bot.user.name} (serverid) VALUES ({guild.id});""")
                 await conn.commit()
         pool.close()
         await pool.wait_closed()
